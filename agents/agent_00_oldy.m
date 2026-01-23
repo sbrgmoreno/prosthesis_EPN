@@ -37,11 +37,11 @@ agentOptions = rlDQNAgentOptions(...
     'TargetUpdateMethod','smoothing', ...
     'TargetSmoothFactor', 0.05, ...
     'TargetUpdateFrequency', 3, ...
-    'ResetExperienceBufferBeforeTraining', false,...
+    'ResetExperienceBufferBeforeTraining', false, ...
     'SaveExperienceBufferWithAgent', true, ...
-    'MiniBatchSize', 16, ... %modificar para cada funcion de recommpensa 16,32,64 
+    'MiniBatchSize', 64, ...
     'NumStepsToLookAhead', 2, ...
-    'ExperienceBufferLength', 5000, ...
+    'ExperienceBufferLength', 1e6, ...
     'DiscountFactor', 0.97);%0.9995
 
 % Exploración-Explotación ajustada
@@ -50,6 +50,24 @@ agentOptions.EpsilonGreedyExploration.Epsilon = 1;
 agentOptions.EpsilonGreedyExploration.EpsilonMin = 0.001;
 
 agent = rlDQNAgent(critic, agentOptions);
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%***PER***%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tamaño del buffer (ajusta si ya tienes uno en configs)
+agent = rlDQNAgent(critic, agentOptions);
+
+% ====== PER (Prioritized Experience Replay) ======
+bufferLength = agentOptions.ExperienceBufferLength;
+
+perBuffer = rlPrioritizedReplayMemory(observationInfo, actionInfo, bufferLength);
+
+perBuffer.PriorityExponent = 0.6;
+perBuffer.InitialImportanceSamplingExponent = 0.4;
+perBuffer.NumAnnealingSteps = bufferLength;
+
+agent.ExperienceBuffer = perBuffer;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
