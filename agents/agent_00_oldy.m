@@ -55,7 +55,7 @@ agent = rlDQNAgent(critic, agentOptions);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%***PER***%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Tamaño del buffer (ajusta si ya tienes uno en configs)
-agent = rlDQNAgent(critic, agentOptions);
+% agent = rlDQNAgent(critic, agentOptions);
 
 % ====== PER (Prioritized Experience Replay) ======
 bufferLength = agentOptions.ExperienceBufferLength;

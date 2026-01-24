@@ -43,6 +43,8 @@ switch agent_id
     case "00_oldy"
         % test the old agent. it not tests parameters.
         agent = agent_00_oldy(observationInfo, actionInfo);
+   case "00_oldy_dueling"
+        agent = agent_00_oldy_dueling(observationInfo, actionInfo);
 
     otherwise
         disp(param_name)
