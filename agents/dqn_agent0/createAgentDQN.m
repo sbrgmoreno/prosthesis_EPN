@@ -36,7 +36,7 @@ agentOptions = rlDQNAgentOptions(...
     'TargetUpdateFrequency', 1, ... %def
     'ResetExperienceBufferBeforeTraining', true,...%default
     'SaveExperienceBufferWithAgent', true, ... % not default
-    'MiniBatchSize', 32, ... & default
+    'MiniBatchSize', 64, ... & default
     'NumStepsToLookAhead', 10, ...
     'ExperienceBufferLength', 10000, ... % default
     'DiscountFactor', 0.99 );% default
